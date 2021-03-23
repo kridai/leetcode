@@ -9,6 +9,8 @@
  * the terms of an agreement between you and CZen.
  */
 
+import java.util.Stack;
+
 /**
  * Created 16/02/21 2:41 PM
  *
@@ -21,5 +23,32 @@ public class TreeNode {
     this.left = left;
     this.right = right;
     this.val = val;
+  }
+  TreeNode(int val){
+    this.val = val;
+  }
+
+  public void inorderTraversal() {
+    Stack<TreeNode> stk = new Stack<>();
+    stk.push(this);
+    TreeNode node = stk.pop();
+    while(!stk.isEmpty() || node != null) {
+      while(node != null) {
+        stk.push(node);
+        node = node.left;
+      }
+      node = stk.pop();
+      System.out.println(node.val);
+      node = node.right;
+    }
+  }
+
+  public void inorderRec(TreeNode node) {
+    if(node == null) {
+      return;
+    }
+    inorderRec(node.left);
+    System.out.println(node.val);
+    inorderRec(node.right);
   }
 }
